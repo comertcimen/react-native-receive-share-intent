@@ -1,14 +1,13 @@
 #import <React/RCTBridgeModule.h>
+#import <Photos/Photos.h>
 
 @interface RCT_EXTERN_MODULE(ReceiveShareIntent, NSObject)
 
-RCT_EXTERN_METHOD(multiply:(float)a withB:(float)b
-                 withResolver:(RCTPromiseResolveBlock)resolve
-                 withRejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXTERN_METHOD(getFileNames:(NSString)url
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter: (RCTPromiseRejectBlock)reject);
 
-+ (BOOL)requiresMainQueueSetup
-{
-  return NO;
-}
+RCT_EXTERN_METHOD(clearFileNames)
+
 
 @end

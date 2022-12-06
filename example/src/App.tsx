@@ -1,18 +1,27 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-receive-share-intent';
+import ReceiveShareIntent from 'react-native-receive-share-intent';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  useEffect(() => {
+    ReceiveShareIntent.getReceivedFiles(
+      (data: any) => {
+        console.log('getReceivedFiles', data);
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
 
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
+    return () => {
+      ReceiveShareIntent.clearReceivedFiles();
+    };
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text>Result:</Text>
     </View>
   );
 }
