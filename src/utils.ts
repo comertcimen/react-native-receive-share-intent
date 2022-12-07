@@ -52,7 +52,7 @@ export class Utils implements IUtils {
   };
 
   getExtension = (fileName: string): string => {
-    return fileName.substr(fileName.lastIndexOf('.') + 1);
+    return fileName.split('.').pop() || '';
   };
 
   getMimeType = (file: string): string => {
