@@ -3,13 +3,29 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import ReceiveShareIntent from 'react-native-receive-share-intent';
 
+const handleFileUrl = (url: string) => {
+  if (url.startsWith('file://')) {
+    return url;
+  }
+  if (url.startsWith('content://')) {
+    return url;
+  }
+  if (url.startsWith('data:')) {
+    return url;
+  }
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  return 'file://' + url;
+};
+
 export default function App() {
   const [image, setImage] = useState<string>('');
   useEffect(() => {
     ReceiveShareIntent.getReceivedFiles(
       (data: any) => {
         console.log(data);
-        setImage(data[0].filePath);
+        setImage(handleFileUrl(data[0].filePath));
       },
       (err: any) => {
         console.log(err);

@@ -1,10 +1,19 @@
 package com.receiveshareintentexample;
 
+import android.content.Intent;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 
 public class MainActivity extends ReactActivity {
+
+
+  @Override
+  public void onNewIntent(Intent intent) {
+  super.onNewIntent(intent);
+  setIntent(intent);
+  }
+
 
   /**
    * Returns the name of the main component registered from JavaScript. This is used to schedule
@@ -24,6 +33,7 @@ public class MainActivity extends ReactActivity {
   protected ReactActivityDelegate createReactActivityDelegate() {
     return new MainActivityDelegate(this, getMainComponentName());
   }
+
 
   public static class MainActivityDelegate extends ReactActivityDelegate {
     public MainActivityDelegate(ReactActivity activity, String mainComponentName) {
